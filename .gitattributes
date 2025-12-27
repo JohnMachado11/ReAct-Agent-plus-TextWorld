@@ -1,0 +1,4 @@
+src/text_world/** linguist-vendored
+*.ni linguist-vendored
+*.i7x linguist-vendored
+*.ulx linguist-vendored
