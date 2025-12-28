@@ -2,7 +2,7 @@
 
 ![Python](https://img.shields.io/badge/python-3.12%2B-blue)
 
-This repo adapts my from scratch **ReAct** (Reasoning and Acting) agent [from here](https://github.com/JohnMachado11/ReAct-Agent-from-Scratch) to play **TextWorld** (2018) by Microsoft.
+This repo adapts my from-scratch **ReAct** (Reasoning and Acting) agent [from here](https://github.com/JohnMachado11/ReAct-Agent-from-Scratch) to play **TextWorld** (2018) by Microsoft.
 
 ----
 
@@ -24,9 +24,9 @@ More concretely:
 
 ## What is TextWorld?
 
-[TextWorld](https://aka.ms/textworld) is a framework for building and playing text based games where the entire environment is described in natural language.
+[TextWorld](https://aka.ms/textworld) is a framework for building and playing text-based games where the entire environment is described in natural language.
 
-**TextWorld** was originally created for the training of reinforcement learning (RL) agents on natural language tasks. Here, I instead use an LLM (`GPT 4.1`) as the agents brain.
+**TextWorld** was originally created for the training of reinforcement learning (RL) agents on natural language tasks. Here, I instead use an LLM (`GPT-4.1`) as the agent's brain.
 
 Instead of pixels, the agent sees a stream of text (room descriptions, objects, inventory, rewards) and responds with text commands such as `go north`, `open door`, or `take key`. 
 Under the hood, **TextWorld**:
@@ -44,9 +44,9 @@ the new textual observation is fed back into the **ReAct** loop.
 
 The goal was to give the agent only minimal, high-level instructions on how to beat the game. I wanted it to reason about the world and choose actions in a way that resembles how a human would play. 
 
-The LLM that I used was `GPT 4.1` and it **does** internally already have knowledge about what **TextWorld** is. Thus, there are priors present on how to play **TextWorld** in the model.
+The LLM that I used was `GPT-4.1` and it **does** internally already have knowledge about what **TextWorld** is. Thus, there are priors present on how to play **TextWorld** in the model.
 
-However, **TextWorld**  games are procedurally generated. Because of that, even with some priors in place, the agent still has to explore it's environment and generalize it's reasoning to succeed, aided by the **ReAct** flow.
+However, **TextWorld** games are procedurally generated. Because of that, even with some priors in place, the agent still has to explore its environment and generalize its reasoning to succeed, aided by the **ReAct** flow.
 
 ### System Prompt Additions (Lightweight Priors)
 
@@ -62,9 +62,9 @@ Examples of the added guidance:
 
 ### Agent Observations
 
-Watching an AI play a game is fascinating to say the least. `GPT 4.1` definitely has its own "style" in how it plays **TextWorld** in comparison to `GPT 4o`, which I did some initial testing with when I first began this project.
+Watching an AI play a game is fascinating to say the least. `GPT-4.1` definitely has its own "style" in how it plays **TextWorld** in comparison to `GPT-4o`, which I did some initial testing with when I first began this project.
 
-Some of the observations below are there because of the priors I added to the agents system prompt.
+Some of the observations below are there because of the priors I added to the agent's system prompt.
 
 Things I noticed:
 - It usually **inspects first**, then **picks items up "just in case"** (`examine` -> `take`).
