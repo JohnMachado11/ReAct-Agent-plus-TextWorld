@@ -113,8 +113,8 @@ def generate_games(
     out_dir,
     base_name,
     fmt="z8",
-    dry_run= False,
-    per_dir= 1,
+    dry_run=False,
+    per_dir=1,
     max_multiplier=4.0,
 ):
     """Generate up to `count` games, each in a new auto-incremented folder `game_<num>`.
