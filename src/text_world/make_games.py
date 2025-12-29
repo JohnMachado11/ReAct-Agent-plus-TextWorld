@@ -22,22 +22,18 @@ Notes:
     generation times and large game files.
 """
 
-from __future__ import annotations
-
 import argparse
 import os
 import shlex
 import subprocess
-import sys
 import random
-from typing import Optional
 
 # No external formatting library required; use simple prints for portability.
 RICH_AVAILABLE = False
 console = None
 
 
-def run_tw_make(command_args: list[str]) -> tuple[int, str, str]:
+def run_tw_make(command_args):
     """Run a `tw-make` command and return (returncode, stdout, stderr).
 
     This wrapper uses subprocess.run to execute the command and captures output
@@ -52,18 +48,18 @@ def run_tw_make(command_args: list[str]) -> tuple[int, str, str]:
     return (proc.returncode, proc.stdout or "", proc.stderr or "")
 
 
-def ensure_dir(path: str) -> None:
+def ensure_dir(path):
     os.makedirs(path, exist_ok=True)
 
 
 def build_tw_make_args(
-    world_size: int,
-    nb_objects: int,
-    quest_length: int,
-    seed: int,
-    output_path: str,
-    fmt: str = "z8",
-) -> list[str]:
+    world_size,
+    nb_objects,
+    quest_length,
+    seed,
+    output_path,
+    fmt="z8",
+):
     """Return the command list for tw-make with these parameters.
 
     The CLI form used is:
@@ -90,7 +86,7 @@ def build_tw_make_args(
     return args
 
 
-def _next_game_dir(out_dir: str) -> str:
+def _next_game_dir(out_dir):
     """Return a new game_<num> directory name under out_dir based on existing folders."""
     ensure_dir(out_dir)
     existing = [d for d in os.listdir(out_dir) if d.startswith("game_") and os.path.isdir(os.path.join(out_dir, d))]
@@ -108,19 +104,19 @@ def _next_game_dir(out_dir: str) -> str:
 
 
 def generate_games(
-    count: int,
-    world_size: int,
-    nb_objects: int,
-    quest_length: int,
-    start_seed: int,
-    seed_step: int,
-    out_dir: str,
-    base_name: str,
-    fmt: str = "z8",
-    dry_run: bool = False,
-    per_dir: int = 1,
-    max_multiplier: float = 4.0,
-) -> int:
+    count,
+    world_size,
+    nb_objects,
+    quest_length,
+    start_seed,
+    seed_step,
+    out_dir,
+    base_name,
+    fmt="z8",
+    dry_run= False,
+    per_dir= 1,
+    max_multiplier=4.0,
+):
     """Generate up to `count` games, each in a new auto-incremented folder `game_<num>`.
 
     For each game, randomly choose a length category: short (len_01) .. long (len_04).
@@ -172,7 +168,7 @@ def generate_games(
     return failures
 
 
-def main(argv: Optional[list[str]] = None) -> int:
+def main(argv=None):
     parser = argparse.ArgumentParser(description="Generate multiple TextWorld games using tw-make")
     parser.add_argument("--count", type=int, default=1, help="How many games to create in this run (each in a new game_<num> folder)")
     parser.add_argument("--base-world-size", type=int, default=5, help="Base world size for level 1. Will scale across levels")
